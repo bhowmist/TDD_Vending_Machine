@@ -17,7 +17,9 @@ class coins():
             elif k=='q':
                 self.name='quarter'
                 self.value=25
-            return
+            else:
+                self.name='Invalid coin'
+                self.value=0
             
                 
 
@@ -27,8 +29,11 @@ class vendingMachine():
 
       #insert coins
       def insert(self):
-              inp=raw_input('Insert coin:')
+              inp=raw_input("Insert coin(n for 'Nickel', d for 'Dime', q for 'Quarter'):")
               coin=coins(inp)
+              if coin.value==0:
+                     print 'Invalid coin, please insert Nickels, Dimes or Quarters'
+                     coin.value+=self.insert()
               return coin.value
               
                

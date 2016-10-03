@@ -79,10 +79,31 @@ class vendingMachine():
                    remaining_price=(round(Decimal(remaining_price),2)-round(Decimal(inserted),2))
            #take care of the change
            if remaining_price<0.0:
-                   send_to_return(abs(remining_price))
+                   self.accepted=''
+                   send_to_return(abs(remaining_price))
            #success message
-           print 'Thank You!'
-           return 'Thank You!'
+           print 'THANK YOU!'
+           return 'THANK YOU!'
+
+    
+      #Make change
+      def send_to_return(self,change):
+           change=int(change*100)
+           while change>0.0:
+                if change>=25:
+                      self.invalid+='q'
+                      val=25
+                if ((change>=10) and (change<25)):
+                      self.invalid+='d'
+                      val=10
+                if ((change>=5) and (change<10)):
+                      self.invalid+='n'
+                      val=5
+                change=(change-val)
+           S= self.Return()
+           print S
+           return S
+                 
              
                      
         

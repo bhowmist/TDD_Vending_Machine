@@ -29,7 +29,19 @@ class TDDVendingMachine(unittest2.TestCase):
 
        def test_5_select_product(self):
              product=self.vm.SELECT()
-             self.assertEqual('Thank You!',product)
+             self.assertEqual('THANK YOU!',product)
+ 
+       def test_6_make_change(self):
+             make_change=self.vm.send_to_return(0.15)
+             self.assertEqual('dn',make_change)
+
+       def test_7_make_change(self):
+             make_change=self.vm.send_to_return(0.40)
+             self.assertEqual('qdn',make_change)
+
+       def test_8_make_change(self):
+             make_change=self.vm.send_to_return(0.85)
+             self.assertEqual('qqqd',make_change)
     
          
 #driver function

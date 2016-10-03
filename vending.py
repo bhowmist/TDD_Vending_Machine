@@ -27,13 +27,37 @@ class coins():
 #vending machine calass
 class vendingMachine():
 
+      def __init__(self):
+             self.invalid=''
+             self.accepted=''
+             
+
       #insert coins
       def insert(self):
-              inp=raw_input("Insert coin(n for 'Nickel', d for 'Dime', q for 'Quarter'):")
+              inp=''
               coin=coins(inp)
-              if coin.value==0:
-                     print 'Invalid coin, please insert Nickels, Dimes or Quarters'
-                     coin.value+=self.insert()
+              while coin.value==0:
+                      self.invalid+=inp
+                      inp=raw_input("Insert coin or press r to return:")
+                      if inp =='r':
+                            return self.Return()
+                      coin=coins(inp)
+              self.accepted+=inp
               return coin.value
+                  
+                  
+
+      #return coins
+      def Return(self):
+           if self.invalid!=None or self.accepted!=None:
+                  s=self.invalid+self.accepted
+                  self.invalid=''
+                  self.accepted=''
+                  return s
+           else:
+                 return 'Nothing to return'
+            
+                     
+        
               
                

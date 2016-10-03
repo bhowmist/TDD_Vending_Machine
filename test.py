@@ -23,10 +23,11 @@ class TDDVendingMachine(unittest2.TestCase):
              quarter=self.vm.insert()
              self.assertEqual(25,quarter)
 
-            
-      
-       
-
+       def test_4_return_invalid_coins(self):
+             invalid=self.vm.insert()
+             self.assertEqual('abc',invalid)
+    
+         
 #driver function
 if __name__=='__main__':
        unittest2.main()

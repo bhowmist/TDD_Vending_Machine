@@ -1,5 +1,7 @@
 #! usr/bin/python
 
+from decimal import Decimal
+
 #create coins
 class coins():
        
@@ -10,16 +12,16 @@ class coins():
       def coinsValue(self,k):
             if k=='n':
                 self.name='nickel'
-                self.value=5
+                self.value=0.05
             elif k=='d':
                 self.name='dime'
-                self.value=10
+                self.value=0.10
             elif k=='q':
                 self.name='quarter'
-                self.value=25
+                self.value=0.25
             else:
                 self.name='Invalid coin'
-                self.value=0
+                self.value=0.00
             
                 
 
@@ -42,6 +44,9 @@ class vendingMachine():
                       if inp =='r':
                             return self.Return()
                       coin=coins(inp)
+                      #if invalid coin, display message 
+                      if coin.value==0:
+                          print 'Insert a valid coin(n,d,q)!' 
               self.accepted+=inp
               return coin.value
                   
@@ -56,7 +61,29 @@ class vendingMachine():
                   return s
            else:
                  return 'Nothing to return'
-            
+
+
+      #select product
+      def SELECT(self):
+           #avilable products
+           products={'cola':1.00,'chips':0.50,'candy':0.65}
+           #choose an item
+           item=raw_input('Select an item, cola, chips or candy: ')
+           print 'You have selected '+item +', ', 
+           #price to be paid
+           remaining_price=(products[item])
+           #accept coins and update display
+           while remaining_price>0.0:
+                   print 'Price : $'+ str(remaining_price)
+                   inserted=(self.insert())
+                   remaining_price=(round(Decimal(remaining_price),2)-round(Decimal(inserted),2))
+           #take care of the change
+           if remaining_price<0.0:
+                   send_to_return(abs(remining_price))
+           #success message
+           print 'Thank You!'
+           return 'Thank You!'
+             
                      
         
               

@@ -29,9 +29,11 @@ class coins():
 #vending machine calass
 class vendingMachine():
 
-      def __init__(self):
+      def __init__(self,quantity=10):
              self.invalid=''
              self.accepted=''
+             #avilable products
+             self.products={'cola':[1.00,quantity],'chips':[0.50,quantity],'candy':[0.65,quantity]} 
              
 
       #insert coins
@@ -58,32 +60,51 @@ class vendingMachine():
                   s=self.invalid+self.accepted
                   self.invalid=''
                   self.accepted=''
+                  print 'please collect your coins!'
+                  print s
                   return s
            else:
-                 return 'Nothing to return'
+                 return 'No coins to return!'
 
 
       #select product
       def SELECT(self):
-           #avilable products
-           products={'cola':1.00,'chips':0.50,'candy':0.65}
            #choose an item
            item=raw_input('Select an item, cola, chips or candy: ')
+           #check if the item is available
+           if self.sold_out(item)=='SOLD OUT':
+                     print 'SOLD OUT'
+                     return 'SOLD OUT'
+           else:
+                     pass 
            print 'You have selected '+item +', ', 
            #price to be paid
-           remaining_price=(products[item])
+           remaining_price=(self.products[item][0])
            #accept coins and update display
            while remaining_price>0.0:
                    print 'Price : $'+ str(remaining_price)
                    inserted=(self.insert())
-                   remaining_price=(round(Decimal(remaining_price),2)-round(Decimal(inserted),2))
+                   try:
+                       remaining_price=(round(Decimal(remaining_price),2)-round(Decimal(inserted),2))
+                   except:
+                       #return coins
+                       return inserted
            #take care of the change
+           self.accepted=''
            if remaining_price<0.0:
-                   self.accepted=''
-                   send_to_return(abs(remaining_price))
+                   self.send_to_return(abs(remaining_price))
+           #quantity of the item is decreased by 1
+           self.sold(item)
            #success message
            print 'THANK YOU!'
            return 'THANK YOU!'
+
+
+      #one item sold
+      def sold(self,item):
+           self.products[item][1]-=1
+           return
+          
 
     
       #Make change
@@ -101,8 +122,14 @@ class vendingMachine():
                       val=5
                 change=(change-val)
            S= self.Return()
-           print S
            return S
+
+
+      #sold out
+      def sold_out(self,item):
+             if self.products[item][1]==0:
+                      return 'SOLD OUT'
+             return 'Available'    
                  
              
                      

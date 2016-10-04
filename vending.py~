@@ -196,11 +196,11 @@ class vendingMachine():
 #to run the application 
 #in isolation with the test
 #script
-'''
+
 if __name__=='__main__':
          v=vendingMachine()
          while True:
-              v.SELECT()'''
+              v.SELECT()
                             
         
               

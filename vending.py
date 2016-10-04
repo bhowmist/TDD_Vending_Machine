@@ -41,7 +41,7 @@ class coins():
 class vendingMachine():
 
       #quantity for each item in inventory is set as 10 by default
-      def __init__(self,quantity=2):
+      def __init__(self,quantity=10):
              self.invalid=''
              self.accepted=''
              self.coin_change=''

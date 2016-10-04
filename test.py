@@ -27,10 +27,10 @@ class TDDVendingMachine(unittest2.TestCase):
              quarter=self.vm.insert()
              self.assertEqual(0.25,quarter)
        
-       #test return invalid coins
+       #test return invalid coins(pennies)
        def test_4_return_invalid_coins(self):
              invalid=self.vm.insert()
-             self.assertEqual('abc',invalid)
+             self.assertEqual('ppp',invalid)
 
        #test select any item and pay the exact price
        def test_5_select_product(self):
@@ -52,22 +52,29 @@ class TDDVendingMachine(unittest2.TestCase):
              make_change=self.vm.send_to_return(0.85)
              self.assertEqual('qqqd',make_change)
 
-       #test return inserted coins(sequence n,d,q,a,b,c) after cancellation of a purchase
-       def test_9_return_all_coins_to_cancel_a_purchase(self):
+       #test return inserted coins(sequence n,d,q,p,p,p) after cancellation of a purchase
+       def test_90_return_all_coins_to_cancel_a_purchase(self):
              all_coins=self.vm.SELECT()
-             self.assertEqual('abcndq',all_coins)
+             self.assertEqual('pppndq',all_coins)
        
        #test item is available
-       def test_10_check_avilable(self):
+       def test_91_check_avilable(self):
              self.vm1=vendingMachine(1)
              available=self.vm1.sold_out('cola')
              self.assertEqual('Available',available)
 
        #test item is sold out
-       def test_11_check_sold_out(self):
+       def test_92_check_sold_out(self):
              self.vm2=vendingMachine(0)
              sold=self.vm2.sold_out('cola')
              self.assertEqual('SOLD OUT',sold)
+
+       #test exact change- choose candy-insert q,q,q
+       def test_93_check_sold_out(self):
+             self.vm3=vendingMachine()
+             self.vm3.SELECT()
+             exact=self.vm3.exact()
+             self.assertEqual('EXACT',exact)
 
        
     

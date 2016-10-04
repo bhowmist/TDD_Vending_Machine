@@ -2,6 +2,7 @@
 This repository contains the scripts for test driven development of the brains of a vending machine.
 
 Application Script - vending .py
+
 Test Script - test.py
 
 ------------

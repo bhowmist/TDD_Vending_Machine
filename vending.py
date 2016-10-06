@@ -37,7 +37,7 @@ class coins():
                 
 
            
-#vending machine calass
+#vending machine class
 class vendingMachine():
 
       #quantity for each item in inventory is set as 10 by default
